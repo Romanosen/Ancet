@@ -4,12 +4,22 @@ package ua.kiev.prog;
 import java.io.Serializable;
 
 public class AncetAnswer implements Serializable {
+
+
+    private String username;
     private String question1;
     private String question2;
     private String question3;
     private String question4;
 
     public AncetAnswer() {
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getQuestion1() {
@@ -47,6 +57,7 @@ public class AncetAnswer implements Serializable {
     @Override
     public String toString() {
         return "AncetAnswer{" +
+                "username="+username+ '\'' +
                 "question1='" + question1 + '\'' +
                 ", question2='" + question2 + '\'' +
                 ", question3='" + question3 + '\'' +

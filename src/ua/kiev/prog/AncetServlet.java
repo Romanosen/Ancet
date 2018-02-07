@@ -20,8 +20,8 @@ public class AncetServlet extends HttpServlet {
    private void readFromfile(){
 
 
-       try {
-           FileInputStream fis = new FileInputStream("F:\\base.txt");
+       try(FileInputStream fis = new FileInputStream("F:\\base.txt"); ) {
+
            ObjectInputStream ois = new ObjectInputStream(fis);
            ancetList = (ArrayList) ois.readObject();
            ois.close();
@@ -35,8 +35,8 @@ public class AncetServlet extends HttpServlet {
 
    }
    private void writeToFile(){
-       try{
-           FileOutputStream fos= new FileOutputStream("F:\\base.txt");
+       try(FileOutputStream fos= new FileOutputStream("F:\\base.txt");){
+
            ObjectOutputStream oos= new ObjectOutputStream(fos);
            oos.writeObject(ancetList);
            oos.close();
@@ -87,12 +87,16 @@ public class AncetServlet extends HttpServlet {
         readFromfile();
         //создание анкеты текущего пользователя
         AncetAnswer aa=new AncetAnswer();
+        aa.setUsername(request.getParameter("login"));
         aa.setQuestion1(request.getParameter("q1"));
         aa.setQuestion2(  request.getParameter("q2"));
         aa.setQuestion3(  request.getParameter("q3"));
         aa.setQuestion4(  request.getParameter("q4"));
         //добавление текущей анкеты в список и запись списка в файл
         ancetList.add(aa);
+        AnsweredUsers.readAusers();
+        AnsweredUsers.ausers.add(aa.getUsername());
+        AnsweredUsers.writeAusers();
         writeToFile();
         //заполнение статистики на основе анкет в списке
         calculateStatistic();
