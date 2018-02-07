@@ -30,7 +30,7 @@ public static void readAusers(){
     public static void writeAusers(){
         try(FileOutputStream fos= new FileOutputStream("F:\\ausers.txt");){
             ObjectOutputStream oos= new ObjectOutputStream(fos);
-            oos.writeObject(ausers);
+            oos.writeObject((List<String>)ausers);
             oos.close();
             fos.close();
         }catch(IOException ioe){
