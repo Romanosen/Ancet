@@ -94,9 +94,10 @@ public class AncetServlet extends HttpServlet {
         aa.setQuestion4(  request.getParameter("q4"));
         //добавление текущей анкеты в список и запись списка в файл
         ancetList.add(aa);
-        AnsweredUsers.readAusers();
-        AnsweredUsers.ausers.add(aa.getUsername());
-        AnsweredUsers.writeAusers();
+        AnsweredUsers ausers=new AnsweredUsers();
+        ausers.readAusers();
+        ausers.getAusers().add(aa.getUsername());
+                        ausers.writeAusers();
         writeToFile();
         //заполнение статистики на основе анкет в списке
         calculateStatistic();

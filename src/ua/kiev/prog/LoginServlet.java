@@ -28,14 +28,14 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String pass = req.getParameter("password");
         String msg;
-
+        AnsweredUsers ausers=new AnsweredUsers();
 
 
         RegisterServlet.readUsers();
         String temp = cred.get(login);
         if (pass.equals(temp)) {
-            AnsweredUsers.readAusers();
-            if (AnsweredUsers.ausers.contains(login)) {
+            ausers.readAusers();
+            if (ausers.getAusers().contains(login)) {
                 resp.getWriter().println(String.format(TEMPLATE, "You already covered ancet"));
             }
             else {

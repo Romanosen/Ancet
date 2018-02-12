@@ -8,9 +8,21 @@ import java.util.Map;
 import java.io.Serializable;
 
 public class AnsweredUsers implements Serializable{
-public static List<String> ausers=new ArrayList<String>();
+public  List<String> ausers;
 
-public static void readAusers(){
+    public List<String> getAusers() {
+        return ausers;
+    }
+
+    public void setAusers(List<String> ausers) {
+        this.ausers = ausers;
+    }
+
+    public AnsweredUsers() {
+        ausers =new ArrayList<String>();
+    }
+
+    public  void readAusers(){
         try(FileInputStream fis = new FileInputStream("F:\\ausers.txt"); ) {
 
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -27,7 +39,7 @@ public static void readAusers(){
 
 
     }
-    public static void writeAusers(){
+    public  void writeAusers(){
         try(FileOutputStream fos= new FileOutputStream("F:\\ausers.txt");){
             ObjectOutputStream oos= new ObjectOutputStream(fos);
             oos.writeObject((List<String>)ausers);
